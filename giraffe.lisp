@@ -1,17 +1,31 @@
 (defun vm (x y)    ; Valid Moves
   (if (and (<= x 6) (>= x 0) (<= y 6) (>= y 0)) 
-      t nil)
-  )
-
+      t nil)   ; If x and y between 0 and 6, valid.
+  )            ; Else, nil
 
 
 (defun pm (x y)    ; Possible Moves
-  (list
-   (list (+ x 1) y)
-   (list (- x 1) y)
-   (list x (+ y 1))
-   (list x (- y 1))
-   )
+  (let ((a '())))
+  (setq movelist (list
+                  (list (+ x 1) y)  ; 4 1-space moves
+                  (list (- x 1) y)
+                  (list x (+ y 1))
+                  (list x (- y 1))
+                  (list (- x 1) (- y 2))  ; 8 knight moves
+                  (list (+ x 1) (- y 2))
+                  (list (+ x 2) (- y 1))
+                  (list (+ x 2) (+ y 1))
+                  (list (+ x 1) (+ y 2))
+                  (list (- x 1) (+ y 2))
+                  (list (- x 2) (+ y 1))
+                  (list (- x 2) (- y 1))
+                  ) )
+  (loop for x in movelist
+        do (if (vm (nth 0 x) (nth 1 x))
+               (format t  "(~D, ~D)~%" (nth 0 x) (nth 1 x))
+               (format t  "BANNED MOVE:(~D, ~D)~%" (nth 0 x) (nth 1 x))
+               )
+        )
   )
 
-  
+(pm 0 0)
