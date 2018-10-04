@@ -24,11 +24,30 @@
           do (if (vm (nth 0 x) (nth 1 x))
                  (setq a (append a (list x)))
                 ;(format t  "(~D, ~D)~%" (nth 0 x) (nth 1 x))
-                 (format t  "BANNED MOVE:(~D, ~D)~%" (nth 0 x) (nth 1 x))
+                 ;(format t  "BANNED MOVE:(~D, ~D)~%" (nth 0 x) (nth 1 x))
                  )
           )
-    (print a)
+    a 
     )
   )
 
-(pm 0 0)
+
+
+
+(defun gir (L)
+  (format t "CURRENT MOVELIST (L): ~S" L)
+  (format t "~%POSSIBLE MOVES: ~S~%" (pm (car (car L)) (car (cdr (car L)))))
+  (if (= (list-length L) 49)
+      (return-from gir L))
+  (setq b '())
+  (loop for square in (pm (car (car L)) (car (cdr (car L))))
+        do (format t "square is: ~S~%" square)
+        (format t "L is: ~S~%" L)
+           (format t "~S~%" (member square L :test 'equal) ) )
+  )
+
+(gir '((0 0) (1 0)))
+
+
+
+
