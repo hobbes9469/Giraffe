@@ -40,7 +40,7 @@
   ;(format t "~%POSSIBLE MOVES: ~S~%" (pm (car (car L)) (car (cdr (car L)))))
   (if (= (list-length L) 49)
       (format t "L: ~S~%" L) )      ; Print out the current path if length is 49
-  (if (= (list-length L) 49)   ; If the path is length 49, return it
+  (if (= (list-length L) 49)
       (return-from gir L))
   (setq b '())
   (loop for square in (pm (car (car L)) (car (cdr (car L))))
@@ -55,6 +55,5 @@
   )
 
 (print (gir '((0 0)))) 
-
 
 
